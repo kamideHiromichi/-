@@ -1,0 +1,41 @@
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>円の情報を入力してください</h2>
+
+<form action="{% url 'calculate' %}" method="POST">
+    {% csrf_token %}
+    <label for="radius">半径:</label><br>
+    <input type="number" id="radius" name="radius"><br>
+    <label for="center_x">中心位置 X:</label><br>
+    <input type="number" id="center_x" name="center_x"><br>
+    <label for="center_y">中心位置 Y:</label><br>
+    <input type="number" id="center_y" name="center_y"><br>
+    <label for="num_segments">分割数:</label><br>
+    <input type="number" id="num_segments" name="num_segments"><br>
+    <input type="submit" value="計算">
+</form>
+
+{% if coordinates %}
+<h2>座標:</h2>
+<table border="1">
+    <tr>
+        <th>番号</th>
+        <th>X</th>
+        <th>Y</th>
+    </tr>
+    {% for number, x, y in coordinates %}
+    <tr>
+        <td>{{ number }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+    
+</body>
+</html>
